@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 my-5">
+            <h3 class="text-muted text-center">Nutrition Analysis</h3>
+            <!-- <p class="text-center">Enter an ingredient list list for what you are cooking, like "1 cup rice, 10 oz chickpeas", etc.
+          Enter each ingredient on a new line.</p> -->
+            <form (ngSubmit)="analyze(f)" #f="ngForm">
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label text-muted">
+                        Enter an ingredient list list for what you are cooking, like "1 cup rice, 10 oz chickpeas", etc.
+                        Enter each ingredient on a new line.
+                    </label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="6" name="analyze" [(ngModel)]="data"
+                        required></textarea>
+                    <button class="btn btn-primary text-white my-3" type="submit" [disabled]="!f.valid">Analyze</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

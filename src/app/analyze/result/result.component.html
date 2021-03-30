@@ -1,0 +1,119 @@
+<div class="container my-4" *ngIf="result">
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Unit</th>
+                            <th scope="col">Food</th>
+                            <th scope="col">Calories</th>
+                            <th scope="col">Weight</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="result && result?.ingredients && result?.ingredients?.length">
+                        <tr *ngFor="let item of result.ingredients; let i = index">
+                            <th *ngIf="item.parsed && item.parsed.length">{{ item.parsed[0].quantity.toFixed(2) }}</th>
+                            <td *ngIf="item.parsed && item.parsed.length">{{ item.parsed[0].measure }}</td>
+                            <td *ngIf="item.parsed && item.parsed.length">{{ item.parsed[0].foodMatch }}</td>
+                            <td *ngIf="item.parsed && item.parsed.length">{{ item.parsed[0].nutrients.ENERC_KCAL.quantity.toFixed(2) }} {{ item.parsed[0].nutrients.ENERC_KCAL.unit
+                                }}</td>
+                            <td *ngIf="item.parsed && item.parsed.length">{{ item.parsed[0].weight }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <button class="btn btn-primary text-white my-3" (click)="showTotal()">Total Nutrition</button>
+        </div>
+    </div>
+</div>
+<div class="container my-4">
+    <div class="row" *ngIf="total">
+        <div class="col-12">
+            <ul class="list-group w-100">
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">Calories</span>
+                    <span class="quantity">{{ result.calories }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.FAT.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.FAT.quantity.toFixed(2) }} {{ result.totalNutrients.FAT.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.CHOLE.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.CHOLE.quantity.toFixed(2) }} {{ result.totalNutrients.CHOLE.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.NA.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.NA.quantity.toFixed(2) }} {{ result.totalNutrients.NA.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.CHOCDF.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.CHOCDF.quantity.toFixed(2) }} {{ result.totalNutrients.CHOCDF.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.FIBTG.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.FIBTG.quantity.toFixed(2) }} {{ result.totalNutrients.FIBTG.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.SUGAR.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.SUGAR.quantity.toFixed(2) }} {{ result.totalNutrients.SUGAR.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.PROCNT.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.PROCNT.quantity.toFixed(2) }} {{ result.totalNutrients.PROCNT.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.TOCPHA.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.TOCPHA.quantity.toFixed(2) }} {{ result.totalNutrients.TOCPHA.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.VITA_RAE.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.VITA_RAE.quantity.toFixed(2) }} {{ result.totalNutrients.VITA_RAE.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.VITB6A.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.VITB6A.quantity.toFixed(2) }} {{ result.totalNutrients.VITB6A.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.VITB12.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.VITB12.quantity.toFixed(2) }} {{ result.totalNutrients.VITB12.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.VITC.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.VITC.quantity.toFixed(2) }} {{ result.totalNutrients.VITC.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.VITD.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.VITD.quantity.toFixed(2) }} {{ result.totalNutrients.VITD.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.VITK1.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.VITK1.quantity.toFixed(2) }} {{ result.totalNutrients.VITK1.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.VITB12.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.VITB12.quantity.toFixed(2) }} {{ result.totalNutrients.VITB12.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.CA.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.CA.quantity.toFixed(2) }} {{ result.totalNutrients.CA.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.FE.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.FE.quantity.toFixed(2) }} {{ result.totalNutrients.FE.unit }}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                    <span class="label font-weight-bold">{{ result.totalNutrients.K.label }}</span>
+                    <span class="quantity">{{ result.totalNutrients.K.quantity.toFixed(2) }} {{ result.totalNutrients.K.unit }}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="empty text-center my-5" *ngIf="!result">
+    <h3>There is no result</h3>
+    <button class="btn btn-primary text-white my-3" (click)="goHome()">Analyze</button>
+</div>
